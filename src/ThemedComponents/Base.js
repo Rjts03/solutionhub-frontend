@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { MuiThemeProvider, createMuiTheme, withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Hidden from '@material-ui/core/Hidden';
 import Drawer from './Drawer';
-import Content from './Content';
 import Header from './Header';
+
+const Background = require('../assets/background/mountain-bg.jpg');
 
 let theme = createMuiTheme({
   typography: {
@@ -143,50 +144,45 @@ const styles = {
   },
   mainContent: {
     flex: 1,
-    padding: '48px 36px 0',
-    background: '#eaeff1',
+    padding: '36px 36px',
+    // backgroundImage: `url(${Background})`,
   },
 };
 
-class Base extends React.Component {
-  state = {
-    mobileOpen: false,
+function Base(props) {
+  const { classes, children } = props;
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
   };
 
-  handleDrawerToggle = () => {
-    this.setState(state => ({ mobileOpen: !state.mobileOpen }));
-  };
-
-  render() {
-    const { classes } = this.props;
-
-    return (
-      <MuiThemeProvider theme={theme}>
-        <div className={classes.root}>
-          <CssBaseline />
-          <nav className={classes.drawer}>
-            <Hidden smUp implementation="js">
-              <Drawer
-                PaperProps={{ style: { width: drawerWidth } }}
-                variant="temporary"
-                open={this.state.mobileOpen}
-                onClose={this.handleDrawerToggle}
-              />
-            </Hidden>
-            <Hidden xsDown implementation="css">
-              <Drawer PaperProps={{ style: { width: drawerWidth } }} />
-            </Hidden>
-          </nav>
-          <div className={classes.appContent}>
-            <Header onDrawerToggle={this.handleDrawerToggle} />
-            <main className={classes.mainContent}>
-              <Content />
-            </main>
-          </div>
+  return (
+    <MuiThemeProvider theme={theme}>
+      <div className={classes.root}>
+        <CssBaseline />
+        <nav className={classes.drawer}>
+          <Hidden smUp implementation="js">
+            <Drawer
+              PaperProps={{ style: { width: drawerWidth } }}
+              variant="temporary"
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+            />
+          </Hidden>
+          <Hidden xsDown implementation="css">
+            <Drawer PaperProps={{ style: { width: drawerWidth } }} />
+          </Hidden>
+        </nav>
+        <div className={classes.appContent}>
+          <Header onDrawerToggle={handleDrawerToggle} />
+          <main className={classes.mainContent}>
+            {children}
+          </main>
         </div>
-      </MuiThemeProvider>
-    );
-  }
+      </div>
+    </MuiThemeProvider>
+  );
 }
 
 Base.propTypes = {

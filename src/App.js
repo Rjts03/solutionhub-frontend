@@ -1,16 +1,19 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import routeMap from './router';
 import './App.css';
+import Base from './ThemedComponents/Base';
 
 const App = () => {
   const routers = routeMap.map(({path, component}) => <Route exact path={path} component={component} />);
   return (
-    <BrowserRouter>
-      <Switch>
-        {routers}
-      </Switch>
-    </BrowserRouter>
+    <Router>
+      <Base>
+        <Switch>
+          {routers}
+        </Switch>
+      </Base>
+    </Router>
   );
 }
 export default App;
