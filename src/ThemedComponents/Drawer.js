@@ -17,12 +17,13 @@ import AnswerIcon from '@material-ui/icons/Message';
 import QnAIcon from '@material-ui/icons/QuestionAnswer';
 import UrgentIcon from '@material-ui/icons/Announcement';
 import UnansweredIcon from '@material-ui/icons/ChatBubbleOutline';
+import { withRouter } from 'react-router';
 
 const categories = [
   {
     id: 'Picks',
     children: [
-      { id: 'Login', icon: <UserIcon />, path: '/login', active: true },
+      { id: 'Login', icon: <UserIcon />, path: '/login' },
       { id: 'Feed', icon: <PeopleIcon />, path: '/' },
       { id: 'My Questions', icon: <QuestionIcon />, path: '/myquestions' },
       { id: 'My Answers', icon: <AnswerIcon />, path: '/myanswers' },
@@ -110,7 +111,7 @@ function Navigator(props) {
                 {id}
               </ListItemText>
             </ListItem>
-            {children.map(({ id: childId, icon, path, active }) => (
+            {children.map(({ id: childId, icon, path }) => (
               <Link to={path} key={childId} style={{ textDecoration: 'none' }}>
                 <ListItem
                   button
@@ -118,7 +119,7 @@ function Navigator(props) {
                   className={classNames(
                     classes.item,
                     classes.itemActionable,
-                    active && classes.itemActiveItem,
+                    path === window.location.pathname && classes.itemActiveItem,
                   )}
                 >
                   <ListItemIcon>{icon}</ListItemIcon>
@@ -145,4 +146,4 @@ Navigator.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Navigator);
+export default withRouter(withStyles(styles)(Navigator));

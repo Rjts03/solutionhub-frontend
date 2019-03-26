@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import classNames from 'classnames';
 import { Paper, Button, TextField, InputAdornment, IconButton, withStyles, Typography } from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 
@@ -44,7 +45,7 @@ function Login({ classes }) {
     <Paper className={classes.paper}>
       <TextField
         id="outlined-simple"
-        className={[classes.margin, classes.textField]}
+        className={classNames(classes.margin, classes.textField)}
         variant="outlined"
         placeholder="Username"
         value={userName}
@@ -53,7 +54,7 @@ function Login({ classes }) {
       {signUp &&
         <TextField
           id="outlined-simple"
-          className={[classes.margin, classes.textField]}
+          className={classNames(classes.margin, classes.textField)}
           variant="outlined"
           placeholder="Email"
           value={email}
@@ -62,7 +63,7 @@ function Login({ classes }) {
       }
       <TextField
         id="outlined-adornment-password"
-        className={[classes.margin, classes.textField]}
+        className={classNames(classes.margin, classes.textField)}
         variant="outlined"
         type={showPassword ? 'text' : 'password'}
         placeholder="Password"
@@ -95,10 +96,9 @@ function Login({ classes }) {
           Don't have an account?
         </Typography>
         <Button
-          variant="outlined"
+          variant="text"
           onClick={() => setSignUp(true)}
           color="secondary"
-          className={classes.button}
         >
           Sign Up
         </Button>

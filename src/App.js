@@ -5,7 +5,10 @@ import './App.css';
 import Base from './ThemedComponents/Base';
 
 const App = () => {
-  const routers = routeMap.map(({path, component}) => <Route exact path={path} component={component} />);
+  const routers = routeMap.map(({path, component}) => {
+    return <Route key={path} exact path={path} component={component} />;
+  });
+  
   return (
     <Router>
       <Base>

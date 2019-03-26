@@ -1,4 +1,4 @@
-import { Feed, Login, MyQuestions, MyAnswers, RelatedQA, Unanswered, Urgent } from './Components';
+import { Feed, Login, MyQuestions, MyAnswers, RelatedQA, Unanswered, Urgent, NotFound } from './Components';
 
 const routeMap = [
   {
@@ -28,6 +28,10 @@ const routeMap = [
   {
     path: '/urgent',
     component: Urgent,
+  },
+  {
+    path: '*',
+    component: NotFound,
   },
   /*
    * Add more routes here 

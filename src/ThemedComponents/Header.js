@@ -11,6 +11,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import { withRouter } from 'react-router';
 
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
@@ -38,6 +39,26 @@ const styles = theme => ({
 
 function Header(props) {
   const { classes, onDrawerToggle } = props;
+  const renderHeading = () => {
+    const pathname = window.location.pathname;
+    const routeName = pathname.split('/')[1];
+    switch (routeName) {
+      case 'login':
+        return 'Authentication';
+      case 'myquestions':
+        return 'My Questions';
+      case 'myanswers':
+        return 'My Answers';
+      case 'related':
+        return 'Related Q&A';
+      case 'urgent':
+        return 'Urgent Questions';
+      case 'unanswered':
+        return 'Unanswered Questions';
+      default:
+        return 'Feed';
+    }
+  };
 
   return (
     <React.Fragment>
@@ -83,7 +104,7 @@ function Header(props) {
           <Grid container alignItems="center" spacing={8}>
             <Grid item xs>
               <Typography color="inherit" variant="h5">
-                Authentication
+                {renderHeading()}
               </Typography>
             </Grid>
           </Grid>
@@ -112,4 +133,4 @@ Header.propTypes = {
   onDrawerToggle: PropTypes.func.isRequired,
 };
 
-export default withStyles(styles)(Header);
+export default withRouter(withStyles(styles)(Header));

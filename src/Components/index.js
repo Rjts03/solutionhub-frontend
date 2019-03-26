@@ -5,5 +5,6 @@ import MyAnswers from './MyAnswers';
 import RelatedQA from './RelatedQA';
 import Unanswered from './Unanswered';
 import Urgent from './Urgent';
+import NotFound from './NotFound';
 
-export { Feed, Login, MyQuestions, MyAnswers, RelatedQA, Unanswered, Urgent };
+export { Feed, Login, MyQuestions, MyAnswers, RelatedQA, Unanswered, Urgent, NotFound };

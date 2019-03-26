@@ -6,8 +6,6 @@ import Hidden from '@material-ui/core/Hidden';
 import Drawer from './Drawer';
 import Header from './Header';
 
-const Background = require('../assets/background/mountain-bg.jpg');
-
 let theme = createMuiTheme({
   typography: {
     useNextVariants: true,
