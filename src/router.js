@@ -1,4 +1,5 @@
 import { Feed, Login, MyQuestions, MyAnswers, RelatedQA, Unanswered, Urgent, NotFound } from './Components';
+import RedirectPage from './Service/Redirect';
 
 const routeMap = [
   {
@@ -14,7 +15,7 @@ const routeMap = [
     component: MyQuestions,
   },
   {
-    path: '/myanswres',
+    path: '/myanswers',
     component: MyAnswers,
   },
   {
@@ -28,6 +29,10 @@ const routeMap = [
   {
     path: '/urgent',
     component: Urgent,
+  },
+  {
+    path: '/auth0-redirect',
+    component: RedirectPage,
   },
   {
     path: '*',

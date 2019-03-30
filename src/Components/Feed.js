@@ -1,19 +1,29 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { fetchQuestions } from '../Actions/questions';
 
-const Feed = () => {
+const Feed = props => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    console.log('called')
-    fetch('http://localhost:8080/route/question')
-    .then(res => res.json())
-    .then(data => setData(data))
-    .catch(e => console.warn(e));
+    console.log(props)
+    props.dispatch(fetchQuestions());
   }, []);
+
+  useEffect(() => {
+    setData(props.questions);
+  }, [props.questions])
+  
   return (
     <div>
-      {data && data[0].question}
+      {data ? data[0].question : 'loading...'}
     </div>
   )
 }
-export default Feed;
+
+const mapStateToProps = state => ({
+  questions: state.questions,
+  fetching: state.fetching
+});
+
+export default connect(mapStateToProps)(Feed);
